@@ -1,0 +1,39 @@
+<div class="p-field">
+    <label for="analysis_path">Analysis Path</label>
+    <input id="analysis_path" type="text" pInputText [(ngModel)]="analysis_path" />
+</div>
+
+<div class="p-field-checkbox">
+    <p-checkbox name="modes" value="Power" [(ngModel)]="modes">Mode1</p-checkbox>
+    <p-checkbox name="modes" value="Heart Rate" [(ngModel)]="modes">Mode2</p-checkbox>
+</div>
+
+<div class="p-field">
+    <button pButton type="button" label="Load Data" (click)="loadData()"></button>
+</div>
+
+<p-table [value]="data" [loading]="loading" dataKey="id">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Start Datetime</th>
+            <th>End Datetime</th>
+            <th>Duration</th>
+            <th>Distance</th>
+            <th>Sport</th>
+            <th>Heart Rate</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+        <tr>
+            <td>{{rowData.start_datetime}}</td>
+            <td>{{rowData.end_datetime}}</td>
+            <td>{{rowData.duration}}</td>
+            <td>{{rowData.distance}}</td>
+            <td>{{rowData.sport}}</td>
+            <td>{{rowData.heart_rate}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="loader">
+        <p-skeleton></p-skeleton>
+    </ng-template>
+</p-table>
