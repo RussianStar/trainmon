@@ -1,12 +1,11 @@
-<p-sidebar>
-  <h2>Menu</h2>
-  <ul>
-    <li><a routerLink="/analyze">Analyze</a></li>
-    <li><a routerLink="/settings">Settings</a></li>
-  </ul>
-</p-sidebar>
+<!-- app.component.html -->
+<mat-toolbar color="primary">
+  <button mat-button routerLink="/">Home</button>
+  <button mat-button routerLink="/analyze">Services</button>
+  <!-- ... other menu items -->
+</mat-toolbar>
 
-<div>
-  <!-- Your page content goes here -->
-</div>
+<p-menubar [model]="items"></p-menubar>
 
+<!-- Your page content goes here -->
+<router-outlet></router-outlet>

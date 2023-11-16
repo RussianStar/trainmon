@@ -1,18 +1,18 @@
 <div class="p-field">
-    <label for="analysis_path">Analysis Path</label>
-    <input id="analysis_path" type="text" pInputText [(ngModel)]="analysis_path" />
+    <label for="analysis_paths">Analysis Paths</label>
+    <p-fileUpload name="analysis_paths" (onUpload)="onUpload($event)" mode="basic" [multiple]="true" [auto]="true"></p-fileUpload>
 </div>
 
 <div class="p-field-checkbox">
-    <p-checkbox name="modes" value="Power" [(ngModel)]="modes">Mode1</p-checkbox>
-    <p-checkbox name="modes" value="Heart Rate" [(ngModel)]="modes">Mode2</p-checkbox>
+    <p-checkbox name="modes" value="power" [(ngModel)]="modes">Power</p-checkbox>
+    <p-checkbox name="modes" value="heart_rate" [(ngModel)]="modes">HeartRate</p-checkbox>
 </div>
 
 <div class="p-field">
-    <button pButton type="button" label="Load Data" (click)="loadData()"></button>
+    <button pButton type="button" label="Load Data" icon="pi pi-refresh" (click)="loadData()"></button>
 </div>
 
-<p-table [value]="data" [loading]="loading" dataKey="id">
+<p-table [value]="data">
     <ng-template pTemplate="header">
         <tr>
             <th>Start Datetime</th>

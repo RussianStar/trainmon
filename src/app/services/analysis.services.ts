@@ -16,8 +16,7 @@ export class AnalysisService {
         "modes": modes
       };
 
-      this.http.post<AnalysisResponse[]>('localhost:3030/analyze', payload).subscribe(response => {
-        // Now you can work with the response data
+      this.http.post<AnalysisResponse[]>('http://localhost:3030/analyze', payload).subscribe(response => {
         console.log(response);
         observer.next(response);
         observer.complete();
