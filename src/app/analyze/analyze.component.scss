@@ -1,27 +1,53 @@
 .container {
-    margin: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 }
 
 .textarea-custom {
-    width: 100%; /* Adjust the width as per your layout */
-    font-size: 18px;
+  width: 100%; /* Adjust the width as per your layout */
+  font-size: 12px;
+  border-color: lightgray;
+  border-radius: 4px;
 }
 
-.chips-custom {
-    width: 100%; /* Adjust the width as per your layout */
+.form-section {
+  margin-bottom: 20px;
+}
+
+.text-section {
+  margin-bottom: 10px;
+}
+
+.analysis-modes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-autocomplete {
+  width: 100%;
+
+  ul {
+    width: 100%
+  }
+}
+
+.load-data {
+  margin-top: 40px;
 }
 
 .button-custom {
-    width: 100%; /* Adjust the width as per your layout */
+  width: 200px; /* Adjust the width as per your layout */
+  height: 30px;
 }
 
 .table-custom {
-    width: 100%; /* Adjust the width as per your layout */
-    overflow-x: auto; /* For responsive table scrolling */
+  width: 100%; /* Adjust the width as per your layout */
+  overflow-x: auto; /* For responsive table scrolling */
 }
 
 /* Additional responsive adjustments can be added as needed */
