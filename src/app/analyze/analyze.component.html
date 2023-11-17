@@ -2,18 +2,20 @@
 <div class="container">
 
     <p-card title="Analysis Control" styleClass="ui-card-shadow">
+      <ng-form>
         <!-- Analysis Paths Section -->
-        <div class="p-field analysis-paths" style="margin-bottom: 20px;">
-            <label for="analysis_paths" style="margin-right: 20px;">Analysis Paths</label>
+        <div class="form-section">
+            <div for="analysis_paths" class="text-section">Analysis Paths</div>
             <textarea id="analysis_paths" [(ngModel)]="input_path"
                       (blur)="parseAnalysisPaths($event)"
                       class="textarea-custom"></textarea>
         </div>
 
         <!-- Analysis Modes Section -->
-        <div class="p-field analysis-modes" style="margin-bottom: 20px;">
-            <label for="modes" style="margin-right: 20px;">Analysis Modes</label>
-            <p-autoComplete id="modes" name="modes" [(ngModel)]="selectedMode"
+        <div class="analysis-modes form-section">
+            <div for="modes" class="text-section">Analysis Modes</div>
+            <p-autoComplete id="modes" name="modes"
+                     [(ngModel)]="selectedMode"
                      [multiple]="true"
                      [required]="true"
                      [autoHighlight]="true"
@@ -21,15 +23,16 @@
                      [suggestions]="getSuggestionsWithoutSelected()"
                      (completeMethod)="filterOptions($event)"
                      (onSelect)="handleChipAddition()"
-                     styleClass="analysis-modes-select"></p-autoComplete>
+            />
         </div>
 
         <!-- Load Data Button -->
-        <div class="p-field load-data">
+        <div class="load-data form-section">
             <button pButton type="button" label="Load Data" icon="pi pi-refresh"
             (click)="loadData()" class="button-custom"
-            style="width: 120px; height: 50px;"></button>
+            ></button>
         </div>
+      </ng-form>
     </p-card>
 
     <!-- Data Table -->
