@@ -9,8 +9,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './reducers/app.reducers';
 import { AppEffects } from './effects/app.effects';
 
-import { AppRoutingModule } from './app-routing.module'; 
-import { AnalyzeComponent } from './analyze/analyze.component'; 
+import { AppRoutingModule } from './app-routing.module';
+import { AnalyzeComponent } from './analyze/analyze.component';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -27,6 +27,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CardModule } from 'primeng/card';
 
 import { SecondsToHmsPipe } from './pipes/hmsPipe';
+import { AutoCompleteModule } from "primeng/autocomplete";
 
 @NgModule({
   declarations: [
@@ -50,11 +51,12 @@ import { SecondsToHmsPipe } from './pipes/hmsPipe';
     AppRoutingModule,
     MatSidenavModule,
     MatToolbarModule,
-      MatButtonModule,
+    MatButtonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ app: appReducer }),
-    EffectsModule.forRoot([AppEffects])
+    StoreModule.forRoot({app: appReducer}),
+    EffectsModule.forRoot([AppEffects]),
+    AutoCompleteModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

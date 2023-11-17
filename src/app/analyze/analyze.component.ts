@@ -48,11 +48,9 @@ export class AnalyzeComponent implements OnInit {
   handleChipAddition(): void {
     const optionFromInput = enumFromStringValue(AnalysisOption, this.tempInput)
     if (optionFromInput && this.modeOptions.includes(optionFromInput)) {
-        this.selectedMode.push(optionFromInput);
-        this.tempInput = ''; // Reset the temporary input
-    } else {
-        this.tempInput = ''; // Reset the temporary input
+      this.selectedMode.push(optionFromInput);
     }
+    this.tempInput = ''; // Reset the temporary input
 }
 filterOptions(event: any): void { // use 'any' to bypass type checking
   let query = event.query;
@@ -61,6 +59,9 @@ filterOptions(event: any): void { // use 'any' to bypass type checking
   );
 }
 
+getSuggestionsWithoutSelected() : AnalysisOption[] {
+    return Object.values(AnalysisOption).filter(option => !this.selectedMode.includes(option))
+}
 
   onAdd(event: any) {
     if (this.modeOptions.includes(event.item)) {
@@ -96,4 +97,7 @@ filterOptions(event: any): void { // use 'any' to bypass type checking
     this.loading = true;
     this.analyze();
   }
+
+  protected readonly Object = Object;
+  protected readonly AnalysisOption = AnalysisOption;
 }

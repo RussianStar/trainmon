@@ -9,22 +9,25 @@
                       (blur)="parseAnalysisPaths($event)"
                       class="textarea-custom"></textarea>
         </div>
-    
+
         <!-- Analysis Modes Section -->
         <div class="p-field analysis-modes" style="margin-bottom: 20px;">
             <label for="modes" style="margin-right: 20px;">Analysis Modes</label>
-            <p-chips id="modes" name="modes" [(ngModel)]="selectedMode"
-                     [suggestions]="filteredOptions"
+            <p-autoComplete id="modes" name="modes" [(ngModel)]="selectedMode"
+                     [multiple]="true"
+                     [required]="true"
+                     [autoHighlight]="true"
+                     [forceSelection]="true"
+                     [suggestions]="getSuggestionsWithoutSelected()"
                      (completeMethod)="filterOptions($event)"
-                     [allowDuplicate]="false"
-                     (onAdd)="handleChipAddition()"
-                     inputStyleClass="chips-custom"></p-chips>
-        </div>    
-    
+                     (onSelect)="handleChipAddition()"
+                     styleClass="analysis-modes-select"></p-autoComplete>
+        </div>
+
         <!-- Load Data Button -->
         <div class="p-field load-data">
-            <button pButton type="button" label="Load Data" icon="pi pi-refresh" 
-            (click)="loadData()" class="button-custom" 
+            <button pButton type="button" label="Load Data" icon="pi pi-refresh"
+            (click)="loadData()" class="button-custom"
             style="width: 120px; height: 50px;"></button>
         </div>
     </p-card>
