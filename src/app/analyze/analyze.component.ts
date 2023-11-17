@@ -16,7 +16,7 @@ export class AnalyzeComponent implements OnInit {
   analysis_paths: string[] = [ "C:\\Users\\TilmanRuß\\Garmin\\10093217294_ACTIVITY.fit",
   "C:\\Users\\TilmanRuß\\Garmin\\10124468420_ACTIVITY.fit"];
   modeOptions: any[] = ["workout","heart_rate", "power", "lactate"];;
-  selectedMode: string[] = []; 
+  selectedMode: string[] = ["workout"]; 
   tempInput: string = "";
   filteredOptions: string[] = [];
   data: Overview[] = [];
@@ -27,9 +27,13 @@ export class AnalyzeComponent implements OnInit {
 
   ngOnInit() {
     this.store.select((state: any) => state.app.data).subscribe((data: AnalysisResponse[]) => {
-      this.data = data.map(item => 
-        item.results[0].Overview)
-        .filter(Boolean) as Overview[];
+      if (data && data.length > 0) {
+        this.data = data.map(item => 
+          item.results && item.results.length > 0 ? item.results[0].Overview : null)
+          .filter(Boolean) as Overview[];
+      } else {
+        this.data = [];
+      }
       this.loading = false;
     });
 

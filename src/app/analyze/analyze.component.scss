@@ -1,0 +1,27 @@
+.container {
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.textarea-custom {
+    width: 100%; /* Adjust the width as per your layout */
+    font-size: 18px;
+}
+
+.chips-custom {
+    width: 100%; /* Adjust the width as per your layout */
+}
+
+.button-custom {
+    width: 100%; /* Adjust the width as per your layout */
+}
+
+.table-custom {
+    width: 100%; /* Adjust the width as per your layout */
+    overflow-x: auto; /* For responsive table scrolling */
+}
+
+/* Additional responsive adjustments can be added as needed */

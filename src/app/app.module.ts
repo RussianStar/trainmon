@@ -23,8 +23,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MenubarModule } from 'primeng/menubar';
 import { DropdownModule } from 'primeng/dropdown';
 import { ChipsModule } from 'primeng/chips'
-import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CardModule } from 'primeng/card';
+
 import { SecondsToHmsPipe } from './pipes/hmsPipe';
 
 @NgModule({
@@ -35,13 +36,13 @@ import { SecondsToHmsPipe } from './pipes/hmsPipe';
   ],
   imports: [
     BrowserModule,
+    CardModule,
     CheckboxModule,
     FileUploadModule,
     TableModule,
     SidebarModule,
     ChipsModule,
     FormsModule,
-    InputTextModule,
     InputTextareaModule,
     DropdownModule,
     SkeletonModule,

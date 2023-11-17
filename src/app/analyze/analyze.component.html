@@ -1,48 +1,60 @@
-<div class="p-field" style="margin-left: 20px;">
-    <label for="analysis_paths">Analysis Paths</label>
-    <p-inputTextarea  [(ngModel)]="input_path"
-     (onBlur)="parseAnalysisPaths($event)"
-      rows="10"
-      cols="100"
-      style="font-size: 18px;"></p-inputTextarea>
+<!-- Wrap everything in a container for better spacing -->
+<div class="container">
+
+    <p-card title="Analysis Control" styleClass="ui-card-shadow">
+        <!-- Analysis Paths Section -->
+        <div class="p-field analysis-paths" style="margin-bottom: 20px;">
+            <label for="analysis_paths" style="margin-right: 20px;">Analysis Paths</label>
+            <textarea id="analysis_paths" [(ngModel)]="input_path"
+                      (blur)="parseAnalysisPaths($event)"
+                      class="textarea-custom"></textarea>
+        </div>
+    
+        <!-- Analysis Modes Section -->
+        <div class="p-field analysis-modes" style="margin-bottom: 20px;">
+            <label for="modes" style="margin-right: 20px;">Analysis Modes</label>
+            <p-chips id="modes" name="modes" [(ngModel)]="selectedMode"
+                     [suggestions]="filteredOptions"
+                     (completeMethod)="filterOptions($event)"
+                     [allowDuplicate]="false"
+                     (onAdd)="handleChipAddition()"
+                     inputStyleClass="chips-custom"></p-chips>
+        </div>    
+    
+        <!-- Load Data Button -->
+        <div class="p-field load-data">
+            <button pButton type="button" label="Load Data" icon="pi pi-refresh" 
+            (click)="loadData()" class="button-custom" 
+            style="width: 120px; height: 50px;"></button>
+        </div>
+    </p-card>
+
+    <!-- Data Table -->
+    <div class="data-table">
+        <p-table [value]="data" class="myCustomClass">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Duration (seconds)</th>
+                    <th>Sport</th>
+                    <th>Distance (km)</th>
+                    <th>TSS</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+                <tr>
+                    <td>{{rowData.start | date:'short'}}</td>
+                    <td>{{rowData.end | date:'short'}}</td>
+                    <td>{{rowData.duration | secondsToHmsPipe}}</td>
+                    <td>{{rowData.sport}}</td>
+                    <td>{{rowData.distance / 1000 | number:'1.1-2'}}</td>
+                    <td>{{rowData.tss}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loader">
+                <p-skeleton></p-skeleton>
+            </ng-template>
+        </p-table>
+            </div>
 </div>
-
-<div class="p-field" style="margin-left: 20px;">
-        <label for="modes">Analysis Modes</label>
-        <p-chips name="modes" [(ngModel)]="selectedMode"
-                 [suggestions]="filteredOptions"
-                 (completeMethod)="filterOptions($event)"
-                 [allowDuplicate]="false"
-                 (onAdd)="handleChipAddition()"
-                 [inputText]="tempInput"></p-chips>
-    </div>    
-
-<div class="p-field" style="margin-left: 20px;">
-    <button pButton type="button" label="Load Data" icon="pi pi-refresh" (click)="loadData()" class="myCustomClass"></button>
-</div>
-
-<p-table [value]="data" class="myCustomClass">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Start</th>
-            <th>End</th>
-            <th>Duration (seconds)</th>
-            <th>Sport</th>
-            <th>Distance (km)</th>
-            <th>TSS</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData>
-        <tr>
-            <td>{{rowData.start | date:'short'}}</td>
-            <td>{{rowData.end | date:'short'}}</td>
-            <td>{{rowData.duration | secondsToHmsPipe}}</td>
-            <td>{{rowData.sport}}</td>
-            <td>{{rowData.distance / 1000 | number:'1.1-2'}}</td>
-            <td>{{rowData.tss}}</td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="loader">
-        <p-skeleton></p-skeleton>
-    </ng-template>
-</p-table>
