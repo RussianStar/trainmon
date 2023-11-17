@@ -5,6 +5,8 @@ import { AppState } from '../state/app.state';
 
 import { Overview } from 'src/model/overview';
 import { AnalysisResponse } from 'src/model/AnalysisResponse';
+import { AnalysisOption } from "./model/types";
+import { enumFromStringValue } from "./util";
 
 @Component({
   selector: 'app-analyze',
@@ -15,10 +17,10 @@ export class AnalyzeComponent implements OnInit {
   input_path: string = "";
   analysis_paths: string[] = [ "C:\\Users\\TilmanRuß\\Garmin\\10093217294_ACTIVITY.fit",
   "C:\\Users\\TilmanRuß\\Garmin\\10124468420_ACTIVITY.fit"];
-  modeOptions: any[] = ["workout","heart_rate", "power", "lactate"];;
-  selectedMode: string[] = ["workout"]; 
+  modeOptions = Object.values(AnalysisOption)
+  selectedMode = [AnalysisOption.WORKOUT];
   tempInput: string = "";
-  filteredOptions: string[] = [];
+  filteredOptions: AnalysisOption[] = [];
   data: Overview[] = [];
   loading: boolean = false;
 
@@ -28,7 +30,7 @@ export class AnalyzeComponent implements OnInit {
   ngOnInit() {
     this.store.select((state: any) => state.app.data).subscribe((data: AnalysisResponse[]) => {
       if (data && data.length > 0) {
-        this.data = data.map(item => 
+        this.data = data.map(item =>
           item.results && item.results.length > 0 ? item.results[0].Overview : null)
           .filter(Boolean) as Overview[];
       } else {
@@ -44,8 +46,9 @@ export class AnalyzeComponent implements OnInit {
 }
 
   handleChipAddition(): void {
-    if (this.modeOptions.includes(this.tempInput)) {
-        this.selectedMode.push(this.tempInput);
+    const optionFromInput = enumFromStringValue(AnalysisOption, this.tempInput)
+    if (optionFromInput && this.modeOptions.includes(optionFromInput)) {
+        this.selectedMode.push(optionFromInput);
         this.tempInput = ''; // Reset the temporary input
     } else {
         this.tempInput = ''; // Reset the temporary input
@@ -53,7 +56,7 @@ export class AnalyzeComponent implements OnInit {
 }
 filterOptions(event: any): void { // use 'any' to bypass type checking
   let query = event.query;
-  this.filteredOptions = this.modeOptions.filter(option => 
+  this.filteredOptions = this.modeOptions.filter(option =>
       option.toLowerCase().startsWith(query.toLowerCase())
   );
 }
