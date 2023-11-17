@@ -1,36 +1,45 @@
-<div class="p-field">
+<div class="p-field" style="margin-left: 20px;">
     <label for="analysis_paths">Analysis Paths</label>
-    <p-fileUpload name="analysis_paths" (onUpload)="onUpload($event)" mode="basic" [multiple]="true" [auto]="true"></p-fileUpload>
+    <p-inputTextarea  [(ngModel)]="input_path"
+     (onBlur)="parseAnalysisPaths($event)"
+      rows="10"
+      cols="100"
+      style="font-size: 18px;"></p-inputTextarea>
 </div>
 
-<div class="p-field-checkbox">
-    <p-checkbox name="modes" value="power" [(ngModel)]="modes">Power</p-checkbox>
-    <p-checkbox name="modes" value="heart_rate" [(ngModel)]="modes">HeartRate</p-checkbox>
+<div class="p-field" style="margin-left: 20px;">
+        <label for="modes">Analysis Modes</label>
+        <p-chips name="modes" [(ngModel)]="selectedMode"
+                 [suggestions]="filteredOptions"
+                 (completeMethod)="filterOptions($event)"
+                 [allowDuplicate]="false"
+                 (onAdd)="handleChipAddition()"
+                 [inputText]="tempInput"></p-chips>
+    </div>    
+
+<div class="p-field" style="margin-left: 20px;">
+    <button pButton type="button" label="Load Data" icon="pi pi-refresh" (click)="loadData()" class="myCustomClass"></button>
 </div>
 
-<div class="p-field">
-    <button pButton type="button" label="Load Data" icon="pi pi-refresh" (click)="loadData()"></button>
-</div>
-
-<p-table [value]="data">
+<p-table [value]="data" class="myCustomClass">
     <ng-template pTemplate="header">
         <tr>
-            <th>Start Datetime</th>
-            <th>End Datetime</th>
-            <th>Duration</th>
-            <th>Distance</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Duration (seconds)</th>
             <th>Sport</th>
-            <th>Heart Rate</th>
+            <th>Distance (km)</th>
+            <th>TSS</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData>
         <tr>
-            <td>{{rowData.start_datetime}}</td>
-            <td>{{rowData.end_datetime}}</td>
-            <td>{{rowData.duration}}</td>
-            <td>{{rowData.distance}}</td>
+            <td>{{rowData.start | date:'short'}}</td>
+            <td>{{rowData.end | date:'short'}}</td>
+            <td>{{rowData.duration | secondsToHmsPipe}}</td>
             <td>{{rowData.sport}}</td>
-            <td>{{rowData.heart_rate}}</td>
+            <td>{{rowData.distance / 1000 | number:'1.1-2'}}</td>
+            <td>{{rowData.tss}}</td>
         </tr>
     </ng-template>
     <ng-template pTemplate="loader">

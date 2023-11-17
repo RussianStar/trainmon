@@ -21,11 +21,16 @@ import {SkeletonModule} from 'primeng/skeleton';
 import {SidebarModule} from 'primeng/sidebar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MenubarModule } from 'primeng/menubar';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { ChipsModule } from 'primeng/chips'
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SecondsToHmsPipe } from './pipes/hmsPipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SecondsToHmsPipe,
     AnalyzeComponent
   ],
   imports: [
@@ -34,7 +39,11 @@ import { MenubarModule } from 'primeng/menubar';
     FileUploadModule,
     TableModule,
     SidebarModule,
+    ChipsModule,
     FormsModule,
+    InputTextModule,
+    InputTextareaModule,
+    DropdownModule,
     SkeletonModule,
     MenubarModule,
     AppRoutingModule,

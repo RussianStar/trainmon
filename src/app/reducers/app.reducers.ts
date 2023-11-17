@@ -12,6 +12,10 @@ export const appReducer = createReducer(
   initialState,
   on(loadApps, (state: AppState) => state),
   on(analyze, (state: AppState) => ({ ...state, loading: true })),
-  on(analyzeSuccess, (state: AppState, { data }: { data: any[] }) => ({ ...state, data, loading: false })),
-  on(analyzeFailure, (state: AppState, { error }: { error: Error }) => ({ ...state, error, loading: false }))
+  on(analyzeSuccess, (state: AppState, { data }: { data: any[] }) => {
+    return { ...state, data, loading: false };
+  }),
+  on(analyzeFailure, (state: AppState, { error }: { error: Error }) => {
+    return { ...state, error, loading: false };
+  })
 );

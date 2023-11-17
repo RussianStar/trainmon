@@ -1,9 +1,10 @@
 
 export interface Overview {
-    start: string;
-    end: string;
+    start: Date;
+    end: Date;
     duration: number;
     sport: string;
     distance: number;
+    tss: number;
   }
   
